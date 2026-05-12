@@ -65,3 +65,12 @@ button {
   border-radius: 0.25rem;
   font-family: 'Merriweather', serif;
 }
+
+.delete-task-btn {
+  cursor: pointer;
+}
+
+.delete-task-btn:hover {
+  background-color: black;
+  color: white;
+}
