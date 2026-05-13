@@ -66,11 +66,13 @@ button {
   font-family: 'Merriweather', serif;
 }
 
-.delete-task-btn {
+.delete-todo-btn,
+.edit-todo-btn {
   cursor: pointer;
 }
 
-.delete-task-btn:hover {
+.delete-todo-btn:hover,
+.edit-todo-btn:hover {
   background-color: black;
   color: white;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CountFunctional } from './Count';
+import { TodoFunctional } from './Todo';
 
 // eslint-disable-next-line react/function-component-definition, react/prop-types
 const FunctionalInput = ({ name }) => {
@@ -8,7 +9,10 @@ const FunctionalInput = ({ name }) => {
     one to store the To-Do's
     and the other to store the value of the input field
   */
-  const [todos, setTodos] = useState([{name: 'Just some demo tasks', edit: false}, {name: 'As an example', edit: false}]);
+  const [todos, setTodos] = useState([
+    {name: 'Just some demo tasks', id: crypto.randomUUID(), edit: false}, 
+    {name: 'As an example', id: crypto.randomUUID(), edit: false}
+  ]);
   const [inputVal, setInputVal] = useState('');
 
   const handleInputChange = (e) => {
@@ -17,13 +21,13 @@ const FunctionalInput = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos((todo) => [...todo, {name: inputVal, edit: false}]);
+    setTodos((todo) => [...todo, {name: inputVal, id: crypto.randomUUID(), edit: false}]);
     setInputVal('');
   };
 
   const handleDelete = (e) => {
     const id = e.currentTarget.dataset.id
-    const filteredTodos = todos.filter(todo => todo.name !== id);
+    const filteredTodos = todos.filter(todo => todo.id !== id);
     setTodos(filteredTodos);
   }
 
@@ -46,10 +50,7 @@ const FunctionalInput = ({ name }) => {
       {/* The list of all the To-Do's, displayed */}
       <ul>
         {todos.map((todo) => (
-          <li key={todo.name}>
-            {todo.name}
-            <button className='delete-task-btn' data-id={todo.name} onClick={handleDelete}>Delete</button>
-          </li>
+          <TodoFunctional todo={todo} onDelete={handleDelete}/>
         ))}
       </ul>
       <CountFunctional todos={todos}/>
