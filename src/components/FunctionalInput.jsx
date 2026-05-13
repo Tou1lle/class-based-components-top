@@ -8,7 +8,7 @@ const FunctionalInput = ({ name }) => {
     one to store the To-Do's
     and the other to store the value of the input field
   */
-  const [todos, setTodos] = useState(['Just some demo tasks', 'As an example']);
+  const [todos, setTodos] = useState([{name: 'Just some demo tasks', edit: false}, {name: 'As an example', edit: false}]);
   const [inputVal, setInputVal] = useState('');
 
   const handleInputChange = (e) => {
@@ -17,13 +17,13 @@ const FunctionalInput = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos((todo) => [...todo, inputVal]);
+    setTodos((todo) => [...todo, {name: inputVal, edit: false}]);
     setInputVal('');
   };
 
   const handleDelete = (e) => {
     const id = e.currentTarget.dataset.id
-    const filteredTodos = todos.filter(todo => todo !== id);
+    const filteredTodos = todos.filter(todo => todo.name !== id);
     setTodos(filteredTodos);
   }
 
@@ -46,9 +46,9 @@ const FunctionalInput = ({ name }) => {
       {/* The list of all the To-Do's, displayed */}
       <ul>
         {todos.map((todo) => (
-          <li key={todo}>
-            {todo}
-            <button className='delete-task-btn' data-id={todo} onClick={handleDelete}>Delete</button>
+          <li key={todo.name}>
+            {todo.name}
+            <button className='delete-task-btn' data-id={todo.name} onClick={handleDelete}>Delete</button>
           </li>
         ))}
       </ul>
