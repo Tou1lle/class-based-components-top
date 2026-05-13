@@ -26,9 +26,22 @@ const FunctionalInput = ({ name }) => {
   };
 
   const handleDelete = (e) => {
-    const id = e.currentTarget.dataset.id
+    const id = e.currentTarget.dataset.id;
     const filteredTodos = todos.filter(todo => todo.id !== id);
     setTodos(filteredTodos);
+  }
+
+  const handleEdit = (e) => {
+    const id = e.currentTarget.dataset.id;
+    const updateEditTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return { name: todo.name, id: todo.id, edited: true };
+      };
+
+      return todo;
+    })
+    console.log(updateEditTodos);
+    setTodos(updateEditTodos);
   }
 
   return (
@@ -50,7 +63,7 @@ const FunctionalInput = ({ name }) => {
       {/* The list of all the To-Do's, displayed */}
       <ul>
         {todos.map((todo) => (
-          <TodoFunctional todo={todo} onDelete={handleDelete}/>
+          <TodoFunctional todo={todo} onDelete={handleDelete} onEdit={handleEdit}/>
         ))}
       </ul>
       <CountFunctional todos={todos}/>
