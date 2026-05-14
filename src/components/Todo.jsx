@@ -1,4 +1,6 @@
-function TodoFunctional({todo, onDelete, onEdit}) {
+import { Component } from "react"
+
+function TodoFunctional({ todo, onDelete, onEdit }) {
   return (
     <li key={todo.id}>
       {console.log(todo)}
@@ -9,4 +11,20 @@ function TodoFunctional({todo, onDelete, onEdit}) {
   )
 }
 
-export { TodoFunctional }
+class TodoClass extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <li key={this.props.todo.id}>
+        {this.props.todo.name}
+        <button className='delete-todo-btn' data-id={this.props.todo.id}>Delete</button>
+        <button className="edit-todo-btn" data-id={this.props.todo.id}>Edit</button>
+      </li>
+    )
+  }
+}
+
+export { TodoFunctional, TodoClass }

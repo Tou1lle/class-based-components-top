@@ -1,13 +1,25 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { CountClass } from './Count';
+import { TodoClass } from './Todo';
 
 class ClassInput extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      todos: ['Just some demo tasks', 'As an example'],
+      todos: [
+        {
+          id: crypto.randomUUID(),
+          edit: false,
+          name: "Just some demo tasks,"
+        },
+        {
+          id: crypto.randomUUID(),
+          edit: false,
+          name: "As an example"
+        }
+      ],
       inputVal: '',
     };
 
@@ -26,7 +38,7 @@ class ClassInput extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState((state) => ({
-      todos: state.todos.concat(state.inputVal),
+      todos: state.todos.concat({id: crypto.randomUUID(), edit: false, name: state.inputVal}),
       inputVal: '',
     }));
   }
@@ -34,7 +46,7 @@ class ClassInput extends Component {
   handleDelete(e) {
     console.log("i run")
     const id = e.currentTarget.dataset.id
-    const filteredTodos = this.state.todos.filter(todo => todo !== id);
+    const filteredTodos = this.state.todos.filter(todo => todo.id !== id);
     this.setState((state) => ({
       ...state,
       todos: filteredTodos,
@@ -62,10 +74,7 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo}>
-              {todo}
-              <button className='delete-task-btn' data-id={todo} onClick={this.handleDelete}>Delete</button>  
-            </li>
+            <TodoClass todo={todo} />
           ))}
         </ul>
         <CountClass todos={this.state.todos}/>

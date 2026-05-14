@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { Component, use, useState } from "react";
 
 function EditTodoFunctional({todo, todoList, setTodos}) {
   const [inputVal, setInputVal] = useState(todo.name)
@@ -38,6 +38,12 @@ function EditTodoFunctional({todo, todoList, setTodos}) {
       </form>
     </li>
   )
+}
+
+class EditTodoClass extends Component {
+  constructor(props) {
+    super(props);
+  }
 }
 
 export { EditTodoFunctional };
