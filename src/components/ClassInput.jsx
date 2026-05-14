@@ -13,7 +13,7 @@ class ClassInput extends Component {
         {
           id: crypto.randomUUID(),
           edit: false,
-          name: "Just some demo tasks,"
+          name: "Just some demo tasks"
         },
         {
           id: crypto.randomUUID(),

@@ -1,6 +1,6 @@
 import { Component, use, useState } from "react";
 
-function EditTodoFunctional({todo, todoList, setTodos}) {
+function EditTodoFunctional({ todo, todoList, setTodos }) {
   const [inputVal, setInputVal] = useState(todo.name)
 
   const handleInputChange = (e) => {
@@ -26,7 +26,7 @@ function EditTodoFunctional({todo, todoList, setTodos}) {
     setTodos(newTodoList);
   }
 
-  return(
+  return (
     <li>
       <form>
         <input
@@ -49,20 +49,41 @@ class EditTodoClass extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSaveChanges = this.handleSaveChanges.bind(this);
   }
 
   handleChange(e) {
     this.setState((state) => ({
-      inputVal: e.target.value}))
+      inputVal: e.target.value
+    }))
+  }
+
+  handleSaveChanges(e) {
+    const newName = this.state.inputVal;
+    const id = e.target.dataset.id;
+    const newTodos = this.props.todos.map(todo => {
+      if (todo.id === id) {
+        return {
+          id: todo.id,
+          edit: false,
+          name: newName
+        }
+      }
+
+      return todo;
+    })
+
+    this.props.setTodos((state) => ({
+      ...state,
+      todos: newTodos
+    }));
   }
 
   render() {
     return (
       <li>
-        <form>
-          <input type="text" value={this.state.inputVal} onChange={this.handleChange}/>
-          <button>Save Changes</button>
-        </form>
+        <input type="text" value={this.state.inputVal} onChange={this.handleChange} />
+        <button className="save-todo-btn" data-id={this.props.todo.id} onClick={this.handleSaveChanges}>Save Changes</button>
       </li>
     )
   }
