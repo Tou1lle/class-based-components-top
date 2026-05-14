@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CountFunctional } from './Count';
 import { TodoFunctional } from './Todo';
+import { EditTodoFunctional } from './EdiTodo';
 
 // eslint-disable-next-line react/function-component-definition, react/prop-types
 const FunctionalInput = ({ name }) => {
@@ -35,7 +36,7 @@ const FunctionalInput = ({ name }) => {
     const id = e.currentTarget.dataset.id;
     const updateEditTodos = todos.map(todo => {
       if (todo.id === id) {
-        return { name: todo.name, id: todo.id, edited: true };
+        return { name: todo.name, id: todo.id, edit: true };
       };
 
       return todo;
@@ -63,7 +64,7 @@ const FunctionalInput = ({ name }) => {
       {/* The list of all the To-Do's, displayed */}
       <ul>
         {todos.map((todo) => (
-          <TodoFunctional todo={todo} onDelete={handleDelete} onEdit={handleEdit}/>
+          todo.edit ? <EditTodoFunctional /> : <TodoFunctional todo={todo} onDelete={handleDelete} onEdit={handleEdit}/>
         ))}
       </ul>
       <CountFunctional todos={todos}/>

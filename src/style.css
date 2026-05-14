@@ -67,12 +67,14 @@ button {
 }
 
 .delete-todo-btn,
-.edit-todo-btn {
+.edit-todo-btn,
+.save-todo-btn {
   cursor: pointer;
 }
 
 .delete-todo-btn:hover,
-.edit-todo-btn:hover {
+.edit-todo-btn:hover,
+.save-todo-btn:hover {
   background-color: black;
   color: white;
 }
