@@ -28,12 +28,14 @@ function EditTodoFunctional({todo, todoList, setTodos}) {
 
   return(
     <li>
-      <input 
-        type="text" 
-        value={inputVal} 
-        onChange={handleInputChange}
-      />
-      <button className="save-todo-btn" data-id={todo.id} onClick={handleSaveChanges}>Save Changes</button>
+      <form>
+        <input
+          type="text"
+          value={inputVal}
+          onChange={handleInputChange}
+        />
+        <button className="save-todo-btn" data-id={todo.id} type="submit" onClick={handleSaveChanges}>Save Changes</button>
+      </form>
     </li>
   )
 }
