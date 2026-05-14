@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { CountClass } from './Count';
 import { TodoClass } from './Todo';
+import { EditTodoClass } from './EdiTodo';
 
 class ClassInput extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class ClassInput extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleInputChange(e) {
@@ -53,6 +55,25 @@ class ClassInput extends Component {
     }));
   }
 
+  handleEdit(e) {
+    const id = e.target.dataset.id;
+    const updatedTodos = this.state.todos.map(todo => {
+      if (todo.id === id) {
+        return {
+          id: todo.id,
+          edit: true,
+          name: todo.name
+        }
+      }
+      return todo;
+    })
+
+    this.setState((state) => ({
+      ...state,
+      todos: updatedTodos
+    }))
+  }
+
   render() {
     return (
       <section>
@@ -74,7 +95,9 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <TodoClass todo={todo} />
+            !todo.edit ?
+            <TodoClass todo={todo} onDelete={this.handleDelete} onEdit={this.handleEdit}/> :
+            <EditTodoClass />
           ))}
         </ul>
         <CountClass todos={this.state.todos}/>

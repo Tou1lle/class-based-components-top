@@ -20,8 +20,8 @@ class TodoClass extends Component {
     return (
       <li key={this.props.todo.id}>
         {this.props.todo.name}
-        <button className='delete-todo-btn' data-id={this.props.todo.id}>Delete</button>
-        <button className="edit-todo-btn" data-id={this.props.todo.id}>Edit</button>
+        <button className='delete-todo-btn' data-id={this.props.todo.id} onClick={this.props.onDelete}>Delete</button>
+        <button className="edit-todo-btn" data-id={this.props.todo.id} onClick={this.props.onEdit}>Edit</button>
       </li>
     )
   }

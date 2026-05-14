@@ -44,6 +44,12 @@ class EditTodoClass extends Component {
   constructor(props) {
     super(props);
   }
+
+  render() {
+    return (
+      <div>true</div>
+    )
+  }
 }
 
-export { EditTodoFunctional };
+export { EditTodoFunctional, EditTodoClass };
