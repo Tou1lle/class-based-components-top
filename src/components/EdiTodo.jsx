@@ -1,10 +1,29 @@
 import { use, useState } from "react";
 
-function EditTodoFunctional({todo, onSaveChanges}) {
+function EditTodoFunctional({todo, todoList, setTodos}) {
   const [inputVal, setInputVal] = useState(todo.name)
 
   const handleInputChange = (e) => {
     setInputVal(e.target.value);
+  }
+
+  const handleSaveChanges = (e) => {
+    const newName = inputVal;
+    const id = e.target.dataset.id;
+    const newTodoList = todoList.map(todo => {
+      // set edit to false to rendet Todo component
+      if (todo.id === id) {
+        return {
+          id: todo.id,
+          edit: false,
+          name: newName,
+        }
+      }
+
+      return todo;
+    })
+
+    setTodos(newTodoList);
   }
 
   return(
@@ -14,7 +33,7 @@ function EditTodoFunctional({todo, onSaveChanges}) {
         value={inputVal} 
         onChange={handleInputChange}
       />
-      <button className="save-todo-btn" onClick={onSaveChanges}>Save Changes</button>
+      <button className="save-todo-btn" data-id={todo.id} onClick={handleSaveChanges}>Save Changes</button>
     </li>
   )
 }

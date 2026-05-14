@@ -45,10 +45,6 @@ const FunctionalInput = ({ name }) => {
     setTodos(updateEditTodos);
   }
 
-  const handleSaveChanges = (e) => {
-
-  }
-
   return (
     <section>
       <h3>{name}</h3>
@@ -68,7 +64,17 @@ const FunctionalInput = ({ name }) => {
       {/* The list of all the To-Do's, displayed */}
       <ul>
         {todos.map((todo) => (
-          todo.edit ? <EditTodoFunctional todo={todo} onSaveChanges={handleSaveChanges}/> : <TodoFunctional todo={todo} onDelete={handleDelete} onEdit={handleEdit}/>
+          todo.edit ? 
+          <EditTodoFunctional
+            todoList={todos} 
+            todo={todo} 
+            setTodos={setTodos}
+          /> : 
+          <TodoFunctional 
+            todo={todo} 
+            onDelete={handleDelete} 
+            onEdit={handleEdit}
+          />
         ))}
       </ul>
       <CountFunctional todos={todos}/>
