@@ -43,11 +43,27 @@ function EditTodoFunctional({todo, todoList, setTodos}) {
 class EditTodoClass extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      inputVal: this.props.todo.name,
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState((state) => ({
+      inputVal: e.target.value}))
   }
 
   render() {
     return (
-      <div>true</div>
+      <li>
+        <form>
+          <input type="text" value={this.state.inputVal} onChange={this.handleChange}/>
+          <button>Save Changes</button>
+        </form>
+      </li>
     )
   }
 }

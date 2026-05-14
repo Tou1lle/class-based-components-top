@@ -97,7 +97,7 @@ class ClassInput extends Component {
           {this.state.todos.map((todo) => (
             !todo.edit ?
             <TodoClass todo={todo} onDelete={this.handleDelete} onEdit={this.handleEdit}/> :
-            <EditTodoClass />
+            <EditTodoClass todo={todo} todos={this.state.todos} setTodos={this.setState}/>
           ))}
         </ul>
         <CountClass todos={this.state.todos}/>
