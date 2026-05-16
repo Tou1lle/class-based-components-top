@@ -73,10 +73,7 @@ class EditTodoClass extends Component {
       return todo;
     })
 
-    this.props.setTodos((state) => ({
-      ...state,
-      todos: newTodos
-    }));
+    this.props.setTodos(newTodos);
   }
 
   render() {

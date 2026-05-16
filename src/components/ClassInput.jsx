@@ -28,6 +28,7 @@ class ClassInput extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleSetTodos = this.handleSetTodos.bind(this);
   }
 
   handleInputChange(e) {
@@ -74,6 +75,13 @@ class ClassInput extends Component {
     }))
   }
 
+  handleSetTodos(newTodos) {
+    this.setState((state) => ({
+      ...state,
+      todos: newTodos
+    }))
+  }
+
   render() {
     return (
       <section>
@@ -97,7 +105,7 @@ class ClassInput extends Component {
           {this.state.todos.map((todo) => (
             !todo.edit ?
             <TodoClass todo={todo} onDelete={this.handleDelete} onEdit={this.handleEdit}/> :
-            <EditTodoClass todo={todo} todos={this.state.todos} setTodos={this.setState}/>
+            <EditTodoClass todo={todo} todos={this.state.todos} setTodos={this.handleSetTodos}/>
           ))}
         </ul>
         <CountClass todos={this.state.todos}/>
